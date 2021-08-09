@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * Написать функцию которая по параметрам принимает число из десятичной системы счисления и преобразовывает в двоичную.
+ * */
+
 function t1_1($n)
 {
     $b = '';
@@ -11,6 +15,12 @@ function t1_1($n)
     return $b;
 }
 
+/*
+ * Написать функцию, которая выполняет преобразование наоборот.
+ *
+ * из двоичной системы счисления и преобразовывает в десятичную
+ *
+ * */
 function t1_2($n)
 {
     $nlen = strlen($n);
@@ -78,9 +88,23 @@ function t3_reg($a, $b)
  Написать функцию которая вычисляет входит ли IP-адрес в диапазон указанных IP-адресов. Вычислить для версии ipv4.
  * */
 
-function t4($start, $end, $ip)
+function t4($start_ip, $end_ip, $ip)
 {
+    $start_ip = str_replace(".", "", $start_ip);
+    $end_ip = str_replace(".", "", $end_ip);
+    $ip = str_replace(".", "", $ip);
 
+    $start_ip = (int)$start_ip;
+    $end_ip = (int)$end_ip;
+    $ip = (int)$ip;
+
+    if ($start_ip != 0 && $end_ip != 0 && $ip != 0) {
+        if ($start_ip <= $ip && $ip <= $end_ip) {
+            echo('true');
+        } else {
+            echo("false");
+        }
+    }
 }
 
 /* Подсчитать процентное соотношение
@@ -95,7 +119,7 @@ function isPrime($num)
             return false;
         }
     }
-    return  $num > 1;
+    return $num > 1;
 }
 
 function t5_1($arr)
@@ -138,6 +162,7 @@ function t5_1($arr)
 /*
  * Отсортировать элементы по возрастанию
  * */
+
 function t5_2($arr)
 {
 
@@ -249,14 +274,74 @@ function t6_1($arr)
 }
 
 
-function t6_2($arr)
+function t6_2($a, $b)
 {
+    $m = count($a);
+    $n = count($a[0]);
+    $c = [];
+    for ($i = 0; $i < $m; $i++) {
+        $c[$i] = [];
+        for ($j = 0; $j < $n; $j++) {
+            $c[$i][$j] = $a[$i][$j] + $b[$i][$j];
+        }
 
+    }
+    return $c;
 }
+
+function t6_3($arr){
+    $sumRow = [];
+    $sumColumn = [];
+
+    $rowHasZero = [];
+    $columnHasZero = [];
+
+    for ($i = 0, $iMax = count($arr); $i < $iMax; $i++) {
+        for ($j = 0, $jMax = count($arr[$i]); $j < $jMax; $j++) {
+            if (!array_key_exists($i, $sumRow)) {
+                $sumRow[$i] = 0;
+            }
+            if (!array_key_exists($j, $sumColumn)) {
+                $sumColumn[$j] = 0;
+            }
+            if (!array_key_exists($i, $rowHasZero)) {
+                $rowHasZero[$i] = false;
+            }
+            if (!array_key_exists($j, $columnHasZero)) {
+                $columnHasZero[$j] = false;
+            }
+
+            $sumRow[$i] += $arr[$i][$j];
+            $sumColumn[$j] += $arr[$i][$j];
+
+            $rowHasZero[$i] = $rowHasZero[$i] || $arr[$i][$j] === 0;
+            $columnHasZero[$j] = $columnHasZero[$j] || $arr[$i][$j] === 0;
+        }
+    }
+    $result = [];
+    for ($i = 0; $i < $iMax; $i++) {
+        if ($rowHasZero[$i]) {
+            continue;
+        }
+        for ($j = 0; $j < $jMax; $j++) {
+            if ($columnHasZero[$j]) {
+                continue;
+            }
+            $result[$i][$j] = $arr[$i][$j];
+            if ($j === $jMax - 1) {
+                $result[$i] = array_values($result[$i]);
+            }
+        }
+    }
+    return array_values($result);
+}
+
 
 /*
  Написать рекурсивную функцию которая будет обходить и выводить все значения любого массива и любого уровня вложенности
 */
+
+
 
 function t_7($arr)
 {
