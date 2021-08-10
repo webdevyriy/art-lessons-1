@@ -5,13 +5,13 @@
  * */
 
 function custom_decbin($n){
-    $res = '';
+    $result = '';
 
     while ($n > 0) {
-        $b = $n % 2 . $res;
+        $b = $n % 2 . $result;
         $n = (int)($n / 2);
     }
-    return $res;
+    return $result;
 }
 
 /*
@@ -63,12 +63,12 @@ function sum_fibonacci_recursively($n)
 
 function custom_pow($number, $exponentiation)
 {
-    $res = $number;
+    $result = $number;
     for ($i = 0; $i < $exponentiation - 1; $i++) {
-        $res = $res * $number;
+        $result = $result * $number;
     }
 
-    return $res;
+    return $result;
 }
 
 /* рекурсивно*/
@@ -127,7 +127,7 @@ function calculate_percentage_array($arr)
     $minus = 0;
     $zero = 0;
     $normal = 0;
-    $res = '';
+    $result = '';
     $all_element = count($arr);
 
     for ($i = 0; $i < $all_element; $i++) {
@@ -149,12 +149,12 @@ function calculate_percentage_array($arr)
     }
 
 
-    $res = 'Положительных = ' . 100 * $plus / $all_element . '%</br>' .
+    $result = 'Положительных = ' . 100 * $plus / $all_element . '%</br>' .
         'Отрицательных = ' . 100 * $minus / $all_element . '%</br>' .
         'Нулевых = ' . 100 * $zero / $all_element . '%</br>' .
         'Простых чисел = ' . 100 * $normal / $all_element . '%</br>';
 
-    return $res;
+    return $result;
 
 }
 
@@ -165,19 +165,19 @@ function calculate_percentage_array($arr)
 function sort_array_ascending($arr)
 {
 
-    $res = $arr;
+    $result = $arr;
 
-    for ($i = 0; $i < count($res); $i++) {
-        for ($j = 0; $j < count($res) - 1 - $i; $j++) {
-            if ($res[$j] > $res[$j + 1]) {
-                $two = $res[$j];
-                $res[$j] = $res[$j + 1];
-                $res[$j + 1] = $two;
+    for ($i = 0; $i < count($result); $i++) {
+        for ($j = 0; $j < count($result) - 1 - $i; $j++) {
+            if ($result[$j] > $result[$j + 1]) {
+                $two = $result[$j];
+                $result[$j] = $result[$j + 1];
+                $result[$j + 1] = $two;
             }
         }
     }
 
-    return print_r($res);
+    return print_r($result);
 }
 
 /*
@@ -215,19 +215,19 @@ function sort_array_ascending_recursively($arr)
 
 function sort_array_descending($arr)
 {
-    $res = $arr;
+    $result = $arr;
 
-    for ($i = 0; $i < count($res); $i++) {
-        for ($j = 0; $j < count($res) - 1 - $i; $j++) {
-            if ($res[$j] < $res[$j + 1]) {
-                $two = $res[$j];
-                $res[$j] = $res[$j + 1];
-                $res[$j + 1] = $two;
+    for ($i = 0; $i < count($result); $i++) {
+        for ($j = 0; $j < count($result) - 1 - $i; $j++) {
+            if ($result[$j] < $result[$j + 1]) {
+                $two = $result[$j];
+                $result[$j] = $result[$j + 1];
+                $result[$j + 1] = $two;
             }
         }
     }
 
-    return print_r($res);
+    return print_r($result);
 }
 
 
@@ -269,28 +269,28 @@ function sort_array_descending_recursively($arr)
 function transpose_matrix($arr)
 {
 
-    $res = [];
+    $result = [];
 
     foreach ($arr[0] as $key => $value) {
-        $res[] = [$value, $arr[1][$key]];
+        $result[] = [$value, $arr[1][$key]];
     }
 
-    return $res;
+    return $result;
 }
 
 
 function sum_matrix($matrix_1, $matrix_2){
     $m = count($matrix_1);
     $n = count($matrix_1[0]);
-    $res = [];
+    $result = [];
     for ($i = 0; $i < $m; $i++) {
-        $res[$i] = [];
+        $result[$i] = [];
         for ($j = 0; $j < $n; $j++) {
-            $res[$i][$j] = $matrix_1[$i][$j] + $matrix_2[$i][$j];
+            $result[$i][$j] = $matrix_1[$i][$j] + $matrix_2[$i][$j];
         }
 
     }
-    return $res;
+    return $result;
 }
 
 /*
