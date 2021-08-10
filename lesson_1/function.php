@@ -8,7 +8,7 @@ function custom_decbin($n){
     $result = '';
 
     while ($n > 0) {
-        $b = $n % 2 . $result;
+        $result = $n % 2 . $result;
         $n = (int)($n / 2);
     }
     return $result;
