@@ -23,13 +23,13 @@
             наоборот.</p>
         <?php
         echo '<pre>';
-        echo t1_1(15);
+        echo custom_decbin(15);
         echo '</pre>';
         ?>
 
         <?php
         echo '<pre>';
-        echo t1_2('1111');
+        echo custom_bindec('1111');
         echo '</pre>';
         ?>
     </section>
@@ -38,11 +38,11 @@
         <p>Найти сумму всех первых N чисел фибоначи</p>
         <?php
         echo '<pre>';
-        print_r(t2(7));
+        print_r(sum_fibonacci(7));
         echo '</pre>';
         echo 'рекурсивно <br>';
         echo '<pre>';
-        echo t2_reg(7);
+        echo sum_fibonacci_recursively(7);
         echo '</pre>';
         ?>
     </section>
@@ -51,11 +51,11 @@
         <p>Написать функцию, возведения числа N в степень M</p>
         <?php
         echo '<pre>';
-        echo t3_reg(2, 4);
+        echo custom_pow(2, 4);
         echo '</pre>';
         echo 'рекурсивно <br>';
         echo '<pre>';
-        echo t3_reg(2, 4);
+        echo custom_pow_recursively(2, 4);
         echo '</pre>';
         ?>
     </section>
@@ -64,7 +64,7 @@
         <p>Написать функцию которая вычисляет входит ли IP-адрес в диапазон указанных IP-адресов. Вычислить для версии ipv4. </p>
         <?php
         echo '<pre>';
-        echo t4('38.229.189.111',  '39.229.189.111', '36.229.189.111');
+                echo calculating_ip('38.229.189.111',  '39.229.189.111', '36.229.189.111');
         echo '</pre>';
         ?>
     </section>
@@ -79,31 +79,29 @@
         </ul>
         <?php
         $arr5 = [2, 5, 3, -59, 2.75];
-
-        echo isPrime(10);
         echo 'подсчитать процентное соотношение';
         echo '<pre>';
-        echo t5_1($arr5);
+        echo calculate_percentage_array($arr5);
         echo '</pre>';
         ?>
         <?php
         echo 'Отсортировать элементы по возрастанию';
         echo '<pre>';
-        print_r(t5_2($arr5));
+        print_r(sort_array_ascending($arr5));
         echo '</pre>';
         echo 'Рекурсивно';
         echo '<pre>';
-        print_r(t5_2_reg($arr5));
+        print_r(sort_array_ascending_recursively($arr5));
         echo '</pre>';
         ?>
         <?php
         echo 'Отсортировать элементы по убыванию';
         echo '<pre>';
-        print_r(t5_3($arr5));
+        print_r(sort_array_descending($arr5));
         echo '</pre>';
         echo 'Рекурсивно';
         echo '<pre>';
-        print_r(t5_3_reg($arr5));
+        print_r(sort_array_descending_recursively($arr5));
         echo '</pre>';
         ?>
     </section>
@@ -119,7 +117,7 @@
         ];
 
         echo '<pre>';
-        print_r(t6_1($arr6));
+        print_r(transpose_matrix($arr6));
         echo '</pre>';
         ?>
 
@@ -140,7 +138,7 @@
 
 
         echo '<pre>';
-        var_export(t6_2($a1, $a2));
+        var_export(sum_matrix($a1, $a2));
         echo '</pre>';
         ?>
 
@@ -151,7 +149,7 @@
             [19, 59, 10, -9, 95],
         ];
         echo '<pre>';
-        var_export(t6_3($arr6_3));
+        var_export(positive_matrix($arr6_3));
         echo '</pre>';
         ?>
     </section>
@@ -168,7 +166,7 @@
         ];
         echo '<pre>';
         echo 'Написать рекурсивную функцию которая будет обходить и выводить все значения любого массива и любого уровня вложенности <br>';
-        echo t_7($arr7);
+        echo get_value_array_complexity($arr7);
         echo '</pre>';
         ?>
     </section>
