@@ -5,13 +5,13 @@
  * */
 
 function custom_decbin($n){
-    $b = '';
+    $res = '';
 
     while ($n > 0) {
-        $b = $n % 2 . $b;
+        $b = $n % 2 . $res;
         $n = (int)($n / 2);
     }
-    return $b;
+    return $res;
 }
 
 /*
