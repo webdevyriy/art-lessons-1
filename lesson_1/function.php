@@ -4,8 +4,7 @@
  * Написать функцию которая по параметрам принимает число из десятичной системы счисления и преобразовывает в двоичную.
  * */
 
-function t1_1($n)
-{
+function custom_decbin($n){
     $b = '';
 
     while ($n > 0) {
@@ -21,7 +20,7 @@ function t1_1($n)
  * из двоичной системы счисления и преобразовывает в десятичную
  *
  * */
-function t1_2($n)
+function custom_bindec($n)
 {
     $nlen = strlen($n);
 
@@ -35,7 +34,7 @@ function t1_2($n)
 
 /* Найти сумму всех первых N чисел фибоначи */
 
-function t2($n)
+function sum_fibonacci($n)
 {
     $fib = [0, 1];
 
@@ -50,23 +49,23 @@ function t2($n)
 
 /* рекурсивно*/
 
-function t2_reg($n)
+function sum_fibonacci_recursively($n)
 {
     if ($n < 2) {
         return $n;
     }
 
-    return t2_reg($n - 1) + t2_reg($n - 2);
+    return sum_fibonacci_recursively($n - 1) + sum_fibonacci_recursively($n - 2);
 }
 
 
 /*Написать функцию, возведения числа N в степень M*/
 
-function t3($a, $b)
+function custom_pow($number, $exponentiation)
 {
-    $res = $a;
-    for ($i = 0; $i < $b - 1; $i++) {
-        $res = $res * $a;
+    $res = $number;
+    for ($i = 0; $i < $exponentiation - 1; $i++) {
+        $res = $res * $number;
     }
 
     return $res;
@@ -74,10 +73,10 @@ function t3($a, $b)
 
 /* рекурсивно*/
 
-function t3_reg($a, $b)
+function custom_pow_recursively($number, $exponentiation)
 {
-    if ($b !== 0) {
-        return $a * t3_reg($a, $b - 1);
+    if ($exponentiation !== 0) {
+        return $number * custom_pow_recursively($number, $exponentiation - 1);
     }
 
     return 1;
@@ -88,18 +87,18 @@ function t3_reg($a, $b)
  Написать функцию которая вычисляет входит ли IP-адрес в диапазон указанных IP-адресов. Вычислить для версии ipv4.
  * */
 
-function t4($start_ip, $end_ip, $ip)
+function calculating_ip($start_ip, $end_ip, $target_ip)
 {
     $start_ip = str_replace(".", "", $start_ip);
     $end_ip = str_replace(".", "", $end_ip);
-    $ip = str_replace(".", "", $ip);
+    $target_ip = str_replace(".", "", $target_ip);
 
     $start_ip = (int)$start_ip;
     $end_ip = (int)$end_ip;
-    $ip = (int)$ip;
+    $target_ip = (int)$target_ip;
 
-    if ($start_ip != 0 && $end_ip != 0 && $ip != 0) {
-        if ($start_ip <= $ip && $ip <= $end_ip) {
+    if ($start_ip != 0 && $end_ip != 0 && $target_ip != 0) {
+        if ($start_ip <= $target_ip && $target_ip <= $end_ip) {
             echo('true');
         } else {
             echo("false");
@@ -122,7 +121,7 @@ function isPrime($num)
     return $num > 1;
 }
 
-function t5_1($arr)
+function calculate_percentage_array($arr)
 {
     $plus = 0;
     $minus = 0;
@@ -163,7 +162,7 @@ function t5_1($arr)
  * Отсортировать элементы по возрастанию
  * */
 
-function t5_2($arr)
+function sort_array_ascending($arr)
 {
 
     $res = $arr;
@@ -187,7 +186,7 @@ function t5_2($arr)
  * */
 
 
-function t5_2_reg($arr)
+function sort_array_ascending_recursively($arr)
 {
     $count = count($arr);
     if ($count <= 1) return $arr;
@@ -205,8 +204,8 @@ function t5_2_reg($arr)
         }
     }
 
-    $leftArr = t5_2_reg($leftArr);
-    $rightArr = t5_2_reg($rightArr);
+    $leftArr = sort_array_ascending_recursively($leftArr);
+    $rightArr = sort_array_ascending_recursively($rightArr);
 
     return array_merge($leftArr, array($baseValue), $rightArr);
 }
@@ -214,7 +213,7 @@ function t5_2_reg($arr)
 
 /* Отсортировать элементы по убыванию*/
 
-function t5_3($arr)
+function sort_array_descending($arr)
 {
     $res = $arr;
 
@@ -237,31 +236,37 @@ function t5_3($arr)
  * Рекурсивно
  * */
 
-function t5_3_reg($arr)
+function sort_array_descending_recursively($arr)
 {
     $count = count($arr);
+    if ($count <= 1) return $arr;
 
     $baseValue = $arr[0];
     $leftArr = $rightArr = array();
 
     for ($i = 1; $i < $count; $i++) {
         if ($baseValue > $arr[$i]) {
+
             $leftArr[] = $arr[$i];
         } else {
+
             $rightArr[] = $arr[$i];
         }
     }
 
-    $leftArr = t5_2_reg($leftArr);
-    $rightArr = t5_2_reg($rightArr);
+    $leftArr = sort_array_ascending_recursively($leftArr);
+    $rightArr = sort_array_ascending_recursively($rightArr);
 
     return array_merge_recursive($leftArr, array($baseValue), $rightArr);
 }
 
 
+
+
+
 /* Для двумерных массивов Транспонировать матрицу */
 
-function t6_1($arr)
+function transpose_matrix($arr)
 {
 
     $res = [];
@@ -274,26 +279,26 @@ function t6_1($arr)
 }
 
 
-function t6_2($a, $b)
-{
-    $m = count($a);
-    $n = count($a[0]);
-    $c = [];
+function sum_matrix($matrix_1, $matrix_2){
+    $m = count($matrix_1);
+    $n = count($matrix_1[0]);
+    $res = [];
     for ($i = 0; $i < $m; $i++) {
-        $c[$i] = [];
+        $res[$i] = [];
         for ($j = 0; $j < $n; $j++) {
-            $c[$i][$j] = $a[$i][$j] + $b[$i][$j];
+            $res[$i][$j] = $matrix_1[$i][$j] + $matrix_2[$i][$j];
         }
 
     }
-    return $c;
+    return $res;
 }
+
 /*
-Удалить строки, в которых сумма элементов положительна и присутствует хотя бы один нулевой элемент аналогично для столбцов
+Удалить строки, в которых сумма элементов положительна и присутствует хотя бы один нулевой элемент Аналогично для столбцов
+   */
 
-*/     
-
-function t6_3($arr){
+function positive_matrix($arr)
+{
     $sumRow = [];
     $sumColumn = [];
 
@@ -346,13 +351,12 @@ function t6_3($arr){
 */
 
 
-
-function t_7($arr)
+function get_value_array_complexity($arr)
 {
 
     foreach ($arr as $val) {
         if (is_array($val)) {
-            t_7($val);
+            get_value_array_complexity($val);
         }
 
         if (is_int($val)) {
