@@ -4,7 +4,8 @@
  * Написать функцию которая по параметрам принимает число из десятичной системы счисления и преобразовывает в двоичную.
  * */
 
-function custom_decbin($number){
+function custom_decbin($number)
+{
     $result = '';
 
     while ($number > 0) {
@@ -130,7 +131,7 @@ function calculate_percentage_array($arr)
     $normal = 0;
     $result = [];
     $all_element = count($arr);
-    if(is_array($arr)){
+    if (is_array($arr)) {
         for ($i = 0; $i < $all_element; $i++) {
 
             if ($arr[$i] > 0) {
@@ -194,7 +195,7 @@ function sort_array_ascending_recursively($arr)
 {
     $count = count($arr);
 
-    if ($count <= 1){
+    if ($count <= 1) {
         return $arr;
     }
 
@@ -256,7 +257,6 @@ function sort_array_descending_recursively($arr)
 
             $left_arr[] = $arr[$i];
         } else {
-
             $right_arr[] = $arr[$i];
         }
     }
@@ -268,33 +268,31 @@ function sort_array_descending_recursively($arr)
 }
 
 
-
-
-
 /* Для двумерных массивов Транспонировать матрицу */
 
 function transpose_matrix($arr)
 {
-        if (!is_array($arr)){
-            return false;
-        }
+    if (!is_array($arr)) {
+        return false;
+    }
 
-       $result = [];
+    $result = [];
 
-        foreach($arr as $key => $value) {
-            if (!is_array($value)){
-                return $arr;
-            }
-            foreach ($value as $key2 => $value2) {
-                $result[$key2][$key] = $value2;
-            }
+    foreach ($arr as $key => $value) {
+        if (!is_array($value)) {
+            return $arr;
         }
-        return $result;
+        foreach ($value as $key2 => $value2) {
+            $result[$key2][$key] = $value2;
+        }
+    }
+    return $result;
 
 }
 
 
-function sum_matrix($matrix_one, $matrix_two){
+function sum_matrix($matrix_one, $matrix_two)
+{
     $m = count($matrix_one);
     $n = count($matrix_one[0]);
     $result = [];
