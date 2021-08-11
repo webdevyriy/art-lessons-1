@@ -81,7 +81,7 @@
         $arr5 = [2, 5, 3, -59, 2.75];
         echo 'подсчитать процентное соотношение';
         echo '<pre>';
-        echo calculate_percentage_array($arr5);
+        echo print_r(calculate_percentage_array($arr5));
         echo '</pre>';
         ?>
         <?php
@@ -116,8 +116,19 @@
             [19, 59, 10, -9, 95],
         ];
 
+
+        $arr1 = [
+            [1,2,3,4,5],
+            [1,2,3,4,5],
+            [1,2,3,4,5],
+            [1,2,3,4,5],
+            [1,2,3,4,5],
+            [1,2,3,4,5],
+            [1,2,3,4,5],
+        ];
+
         echo '<pre>';
-        print_r(transpose_matrix($arr6));
+        print_r(transpose_matrix($arr1));
         echo '</pre>';
         ?>
 
