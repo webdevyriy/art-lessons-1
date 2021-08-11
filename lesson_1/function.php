@@ -4,12 +4,12 @@
  * Написать функцию которая по параметрам принимает число из десятичной системы счисления и преобразовывает в двоичную.
  * */
 
-function custom_decbin($n){
+function custom_decbin($number){
     $result = '';
 
-    while ($n > 0) {
-        $result = $n % 2 . $result;
-        $n = (int)($n / 2);
+    while ($number > 0) {
+        $result = $number % 2 . $result;
+        $number = (int)($number / 2);
     }
     return $result;
 }
@@ -20,42 +20,43 @@ function custom_decbin($n){
  * из двоичной системы счисления и преобразовывает в десятичную
  *
  * */
-function custom_bindec($n)
+function custom_bindec($number)
 {
-    $nlen = strlen($n);
+    $number_len = strlen($number);
+    $result = '';
 
-    for ($i = 0; $i < $nlen; $i++) {
-        $currentIteration += ((int)$n[$nlen - $i - 1]) * 2 ** $i;
+    for ($i = 0; $i < $number_len; $i++) {
+        $result += ((int)$number[$number_len - $i - 1]) * 2 ** $i;
     }
 
-    return $currentIteration;
+    return $result;
 }
 
 
 /* Найти сумму всех первых N чисел фибоначи */
 
-function sum_fibonacci($n)
+function sum_fibonacci($number)
 {
     $fib = [0, 1];
 
-    for ($i = 2; $i <= $n; $i++) {
-        $prevNum1 = $fib[$i - 1];
-        $prevNum2 = $fib[$i - 2];
-        $fib[] = $prevNum1 + $prevNum2;
+    for ($i = 2; $i <= $number; $i++) {
+        $prev_num = $fib[$i - 1];
+        $prev_num = $fib[$i - 2];
+        $fib[] = $prev_num + $prev_num;
     }
 
-    return $fib[$n];
+    return $fib[$number];
 }
 
 /* рекурсивно*/
 
-function sum_fibonacci_recursively($n)
+function sum_fibonacci_recursively($number)
 {
-    if ($n < 2) {
-        return $n;
+    if ($number < 2) {
+        return $number;
     }
 
-    return sum_fibonacci_recursively($n - 1) + sum_fibonacci_recursively($n - 2);
+    return sum_fibonacci_recursively($number - 1) + sum_fibonacci_recursively($number - 2);
 }
 
 
@@ -111,14 +112,14 @@ function calculating_ip($start_ip, $end_ip, $target_ip)
  */
 
 
-function isPrime($num)
+function is_prime($number)
 {
-    for ($i = 2; $i < $num; $i++) {
-        if ($num % $i === 0) {
+    for ($i = 2; $i < $number; $i++) {
+        if ($number % $i === 0) {
             return false;
         }
     }
-    return $num > 1;
+    return $number > 1;
 }
 
 function calculate_percentage_array($arr)
@@ -127,34 +128,37 @@ function calculate_percentage_array($arr)
     $minus = 0;
     $zero = 0;
     $normal = 0;
-    $result = '';
+    $result = [];
     $all_element = count($arr);
+    if(is_array($arr)){
+        for ($i = 0; $i < $all_element; $i++) {
 
-    for ($i = 0; $i < $all_element; $i++) {
+            if ($arr[$i] > 0) {
+                $plus++;
+            }
 
-        if ($arr[$i] > 0) {
-            $plus++;
-        }
+            if ($arr[$i] < 0) {
+                $minus++;
+            }
+            if ($arr[$i] == 0) {
+                $zero++;
+            }
+            if (is_prime($arr[$i])) {
+                $normal++;
+            }
 
-        if ($arr[$i] < 0) {
-            $minus++;
         }
-        if ($arr[$i] == 0) {
-            $zero++;
-        }
-        if (isPrime($arr[$i])) {
-            $normal++;
-        }
-
     }
 
+    $result_object = [
+        'процент положительных чисел' => 100 * $plus / $all_element,
+        'процент отрицательных чисел' => 100 * $minus / $all_element,
+        'процент нулевых чисел' => 100 * $zero / $all_element,
+        'процент простых чисел' => 100 * $normal / $all_element,
+    ];
 
-    $result = 'Положительных = ' . 100 * $plus / $all_element . '%</br>' .
-        'Отрицательных = ' . 100 * $minus / $all_element . '%</br>' .
-        'Нулевых = ' . 100 * $zero / $all_element . '%</br>' .
-        'Простых чисел = ' . 100 * $normal / $all_element . '%</br>';
 
-    return $result;
+    return $result_object;
 
 }
 
@@ -177,7 +181,7 @@ function sort_array_ascending($arr)
         }
     }
 
-    return print_r($result);
+    return $result;
 }
 
 /*
@@ -189,25 +193,28 @@ function sort_array_ascending($arr)
 function sort_array_ascending_recursively($arr)
 {
     $count = count($arr);
-    if ($count <= 1) return $arr;
 
-    $baseValue = $arr[0];
-    $leftArr = $rightArr = array();
+    if ($count <= 1){
+        return $arr;
+    }
+
+    $base_value = $arr[0];
+    $left_arr = $right_arr = array();
 
     for ($i = 1; $i < $count; $i++) {
-        if ($baseValue > $arr[$i]) {
+        if ($base_value > $arr[$i]) {
 
-            $leftArr[] = $arr[$i];
+            $left_arr[] = $arr[$i];
         } else {
 
-            $rightArr[] = $arr[$i];
+            $right_arr[] = $arr[$i];
         }
     }
 
-    $leftArr = sort_array_ascending_recursively($leftArr);
-    $rightArr = sort_array_ascending_recursively($rightArr);
+    $left_arr = sort_array_ascending_recursively($left_arr);
+    $right_arr = sort_array_ascending_recursively($right_arr);
 
-    return array_merge($leftArr, array($baseValue), $rightArr);
+    return array_merge($left_arr, array($base_value), $right_arr);
 }
 
 
@@ -227,7 +234,7 @@ function sort_array_descending($arr)
         }
     }
 
-    return print_r($result);
+    return $result;
 }
 
 
@@ -241,23 +248,23 @@ function sort_array_descending_recursively($arr)
     $count = count($arr);
     if ($count <= 1) return $arr;
 
-    $baseValue = $arr[0];
-    $leftArr = $rightArr = array();
+    $base_value = $arr[0];
+    $left_arr = $right_arr = array();
 
     for ($i = 1; $i < $count; $i++) {
-        if ($baseValue > $arr[$i]) {
+        if ($base_value > $arr[$i]) {
 
-            $leftArr[] = $arr[$i];
+            $left_arr[] = $arr[$i];
         } else {
 
-            $rightArr[] = $arr[$i];
+            $right_arr[] = $arr[$i];
         }
     }
 
-    $leftArr = sort_array_ascending_recursively($leftArr);
-    $rightArr = sort_array_ascending_recursively($rightArr);
+    $left_arr = sort_array_ascending_recursively($left_arr);
+    $right_arr = sort_array_ascending_recursively($right_arr);
 
-    return array_merge_recursive($leftArr, array($baseValue), $rightArr);
+    return array_merge_recursive($left_arr, array($base_value), $right_arr);
 }
 
 
@@ -268,25 +275,33 @@ function sort_array_descending_recursively($arr)
 
 function transpose_matrix($arr)
 {
+        if (!is_array($arr)){
+            return false;
+        }
 
-    $result = [];
+       $result = [];
 
-    foreach ($arr[0] as $key => $value) {
-        $result[] = [$value, $arr[1][$key]];
-    }
+        foreach($arr as $key => $value) {
+            if (!is_array($value)){
+                return $arr;
+            }
+            foreach ($value as $key2 => $value2) {
+                $result[$key2][$key] = $value2;
+            }
+        }
+        return $result;
 
-    return $result;
 }
 
 
-function sum_matrix($matrix_1, $matrix_2){
-    $m = count($matrix_1);
-    $n = count($matrix_1[0]);
+function sum_matrix($matrix_one, $matrix_two){
+    $m = count($matrix_one);
+    $n = count($matrix_one[0]);
     $result = [];
     for ($i = 0; $i < $m; $i++) {
         $result[$i] = [];
         for ($j = 0; $j < $n; $j++) {
-            $result[$i][$j] = $matrix_1[$i][$j] + $matrix_2[$i][$j];
+            $result[$i][$j] = $matrix_one[$i][$j] + $matrix_two[$i][$j];
         }
 
     }
@@ -299,45 +314,45 @@ function sum_matrix($matrix_1, $matrix_2){
 
 function positive_matrix($arr)
 {
-    $sumRow = [];
-    $sumColumn = [];
+    $sum_row = [];
+    $sum_column = [];
 
-    $rowHasZero = [];
-    $columnHasZero = [];
+    $row_has_zero = [];
+    $column_has_zero = [];
 
-    for ($i = 0, $iMax = count($arr); $i < $iMax; $i++) {
-        for ($j = 0, $jMax = count($arr[$i]); $j < $jMax; $j++) {
-            if (!array_key_exists($i, $sumRow)) {
-                $sumRow[$i] = 0;
+    for ($i = 0, $i_max = count($arr); $i < $i_max; $i++) {
+        for ($j = 0, $j_max = count($arr[$i]); $j < $j_max; $j++) {
+            if (!array_key_exists($i, $sum_row)) {
+                $sum_row[$i] = 0;
             }
-            if (!array_key_exists($j, $sumColumn)) {
-                $sumColumn[$j] = 0;
+            if (!array_key_exists($j, $sum_column)) {
+                $sum_column[$j] = 0;
             }
-            if (!array_key_exists($i, $rowHasZero)) {
-                $rowHasZero[$i] = false;
+            if (!array_key_exists($i, $row_has_zero)) {
+                $row_has_zero[$i] = false;
             }
-            if (!array_key_exists($j, $columnHasZero)) {
-                $columnHasZero[$j] = false;
+            if (!array_key_exists($j, $column_has_zero)) {
+                $column_has_zero[$j] = false;
             }
 
-            $sumRow[$i] += $arr[$i][$j];
-            $sumColumn[$j] += $arr[$i][$j];
+            $sum_row[$i] += $arr[$i][$j];
+            $sum_column[$j] += $arr[$i][$j];
 
-            $rowHasZero[$i] = $rowHasZero[$i] || $arr[$i][$j] === 0;
-            $columnHasZero[$j] = $columnHasZero[$j] || $arr[$i][$j] === 0;
+            $row_has_zero[$i] = $row_has_zero[$i] || $arr[$i][$j] === 0;
+            $column_has_zero[$j] = $column_has_zero[$j] || $arr[$i][$j] === 0;
         }
     }
     $result = [];
-    for ($i = 0; $i < $iMax; $i++) {
-        if ($rowHasZero[$i]) {
+    for ($i = 0; $i < $i_max; $i++) {
+        if ($row_has_zero[$i]) {
             continue;
         }
-        for ($j = 0; $j < $jMax; $j++) {
-            if ($columnHasZero[$j]) {
+        for ($j = 0; $j < $j_max; $j++) {
+            if ($column_has_zero[$j]) {
                 continue;
             }
             $result[$i][$j] = $arr[$i][$j];
-            if ($j === $jMax - 1) {
+            if ($j === $j_max - 1) {
                 $result[$i] = array_values($result[$i]);
             }
         }
