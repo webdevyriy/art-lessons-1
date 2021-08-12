@@ -310,44 +310,80 @@ function sum_matrix($matrix_one, $matrix_two)
 }
 
 /*
-Удалить строки, в которых сумма элементов положительна и присутствует хотя бы один нулевой элемент Аналогично для столбцов
+Удалить строки, в которых сумма элементов положительна и присутствует хотя бы один нулевой элемент
    */
 
-function positive_matrix($arr)
+function positive_matrix_row($arr)
 {
     $sum_row = [];
-    $sum_column = [];
 
     $row_has_zero = [];
-    $column_has_zero = [];
 
     for ($i = 0, $i_max = count($arr); $i < $i_max; $i++) {
         for ($j = 0, $j_max = count($arr[$i]); $j < $j_max; $j++) {
             if (!array_key_exists($i, $sum_row)) {
                 $sum_row[$i] = 0;
             }
-            if (!array_key_exists($j, $sum_column)) {
-                $sum_column[$j] = 0;
-            }
+
             if (!array_key_exists($i, $row_has_zero)) {
                 $row_has_zero[$i] = false;
             }
+
+            $sum_row[$i] += $arr[$i][$j];
+
+            $row_has_zero[$i] = $row_has_zero[$i] || $arr[$i][$j] === 0;
+
+        }
+    }
+    $result = [];
+
+    for ($i = 0; $i < $i_max; $i++) {
+        if ($row_has_zero[$i]) {
+            continue;
+        }
+        for ($j = 0; $j < $j_max; $j++) {
+
+            $result[$i][$j] = $arr[$i][$j];
+            if ($j === $j_max - 1) {
+                $result[$i] = array_values($result[$i]);
+            }
+        }
+    }
+    return array_values($result);
+}
+
+/*
+ * Удалить те столбцы, в которых сумма элементов положительна и присутствует хотя бы один нулевой элемент.
+ * */
+function positive_matrix_column($arr)
+{
+
+    $sum_column = [];
+
+
+    $column_has_zero = [];
+
+    for ($i = 0, $i_max = count($arr); $i < $i_max; $i++) {
+        for ($j = 0, $j_max = count($arr[$i]); $j < $j_max; $j++) {
+
+            if (!array_key_exists($j, $sum_column)) {
+                $sum_column[$j] = 0;
+            }
+
             if (!array_key_exists($j, $column_has_zero)) {
                 $column_has_zero[$j] = false;
             }
 
-            $sum_row[$i] += $arr[$i][$j];
+
             $sum_column[$j] += $arr[$i][$j];
 
-            $row_has_zero[$i] = $row_has_zero[$i] || $arr[$i][$j] === 0;
+
             $column_has_zero[$j] = $column_has_zero[$j] || $arr[$i][$j] === 0;
         }
     }
     $result = [];
     for ($i = 0; $i < $i_max; $i++) {
-        if ($row_has_zero[$i]) {
-            continue;
-        }
+
         for ($j = 0; $j < $j_max; $j++) {
             if ($column_has_zero[$j]) {
                 continue;
