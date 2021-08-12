@@ -38,15 +38,15 @@ function custom_bindec($number)
 
 function sum_fibonacci($number)
 {
-    $fib = [0, 1];
+    $result = [0, 1];
 
     for ($i = 2; $i <= $number; $i++) {
-        $prev_num = $fib[$i - 1];
-        $prev_num = $fib[$i - 2];
-        $fib[] = $prev_num + $prev_num;
+        $prev_num_one = $result[$i - 1];
+        $prev_num_two = $result[$i - 2];
+        $result[] = $prev_num_one + $prev_num_two;
     }
 
-    return $fib[$number];
+    return $result[$number];
 }
 
 /* рекурсивно*/
@@ -247,7 +247,10 @@ function sort_array_descending($arr)
 function sort_array_descending_recursively($arr)
 {
     $count = count($arr);
-    if ($count <= 1) return $arr;
+    if ($count <= 1){
+        return $arr;
+    }
+
 
     $base_value = $arr[0];
     $left_arr = $right_arr = array();
